@@ -206,52 +206,88 @@ function App() {
 
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="min-h-screen flex flex-col md:flex-row items-center justify-between px-4 max-w-6xl mx-auto py-12 md:py-0">
-          <div className="flex-1 z-10 text-center md:text-left">
-            <p className="text-[#29B475] mb-4 animate-fadeIn">Hi 👋, my name is</p>
-            <h1 className="text-4xl md:text-7xl font-bold mb-6">
-              Bhargav
-            </h1>
-            <div className="text-xl md:text-4xl mb-6">
-              <span>I'm a </span>
-              <div className="typing-container">
-                <span className=" text-[#29B475]">
+        <section className="min-h-screen w-full px-4 py-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            {/* Content Column */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6">
+              <p className="text-[#29B475] animate-fadeIn flex items-center gap-2">
+                Hi <span className="animate-wave inline-block">👋</span>, my name is
+              </p>
+
+              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">
+                Bhargav
+              </h1>
+
+              <div className="text-2xl lg:text-4xl">
+                <span>I'm a </span>
+                <span className="text-[#29B475]">
                   <TypingEffect />
                 </span>
               </div>
-            </div>
-            <p className="text-base md:text-xl text-gray-300 max-w-xl mb-8">
-              Passionate about creating innovative web solutions and turning complex problems into elegant interfaces.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="#contact" className="w-full sm:w-auto bg-[#29B475] text-white px-6 py-3 rounded-lg hover:bg-[#29B475]/90 transition-colors flex items-center justify-center gap-2">
-                Get in touch <ArrowRight size={20} />
-              </a>
-              <button
-                onClick={handleDownloadCV}
-                className="w-full sm:w-auto border-2 border-[#29B475] text-[#29B475] px-6 py-3 rounded-lg hover:bg-[#29B475] hover:text-white transition-colors flex items-center justify-center gap-2"
-              >
-                Download CV <Download size={20} />
-              </button>
-              <div className="flex items-center space-x-4">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#29B475] transition-colors">
-                  <Github size={24} />
-                </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#29B475] transition-colors">
-                  <Linkedin size={24} />
-                </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#29B475] transition-colors">
-                  <Twitter size={24} />
-                </a>
+
+              <p className="text-lg text-gray-300 max-w-xl">
+                Passionate about creating innovative web solutions and turning complex problems into elegant interfaces.
+              </p>
+
+              {/* Buttons and Social Links Container */}
+              <div className="flex flex-col w-full sm:w-auto gap-4">
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="#contact"
+                    className="w-full sm:w-auto bg-[#29B475] text-white px-6 py-3 rounded-lg hover:bg-[#29B475]/90 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                  >
+                    Get in touch <ArrowRight className="w-5 h-5" />
+                  </a>
+
+                  <button
+                    onClick={handleDownloadCV}
+                    className="w-full sm:w-auto border-2 border-[#29B475] text-[#29B475] px-6 py-3 rounded-lg hover:bg-[#29B475] hover:text-white transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                  >
+                    Download CV <Download className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Social Links */}
+                <div className="flex justify-center md:justify-start gap-6">
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#29B475] transition-colors"
+                  >
+                    <Github className="w-6 h-6" />
+                  </a>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#29B475] transition-colors"
+                  >
+                    <Linkedin className="w-6 h-6" />
+                  </a>
+                  <a
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#29B475] transition-colors"
+                  >
+                    <Twitter className="w-6 h-6" />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="hidden md:block flex-1 ml-8">
-            <img
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80"
-              alt="Professional Developer"
-              className="rounded-lg shadow-2xl animate-fadeIn max-w-full h-auto"
-            />
+
+            {/* Image Column - Visible on all devices */}
+            <div className="relative w-full max-w-lg mx-auto md:ml-auto order-first md:order-last">
+              <div className="aspect-square relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80"
+                  alt="Professional Developer"
+                  className="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
