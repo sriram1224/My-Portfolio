@@ -282,7 +282,7 @@ function App() {
             <div className="relative w-full max-w-lg mx-auto md:ml-auto order-first md:order-last">
               <div className="aspect-square relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80"
+                  src="https://drive.google.com/file/d/1R0UZqpUV-6dgWUTWUK73BOOpCDoIj375/view?usp=sharing"
                   alt="Professional Developer"
                   className="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105"
                 />
