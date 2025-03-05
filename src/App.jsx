@@ -282,7 +282,7 @@ function App() {
             <div className="relative w-full max-w-lg mx-auto md:ml-auto order-first md:order-last">
               <div className="aspect-square relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="./src/assets/img.png" // Updated image path
+                  src="https://res.cloudinary.com/djqmqawu9/image/upload/v1741192176/insta_pic_xns5eh.jpg" // Updated image path
                   alt="Professional Developer"
                   className="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105"
                 />
