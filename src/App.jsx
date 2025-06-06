@@ -1,75 +1,157 @@
-import React, { useState, useEffect } from 'react';
-import { Code2, Briefcase, Mail, Terminal, User, Github, Linkedin, Twitter, Globe, ArrowRight, Download } from 'lucide-react';
-import * as SimpleIcons from 'simple-icons';
-import SkillsMarquee from './components/magicui/SkillsMarquee';
-import { cn } from './lib/utils'; // Corrected import path
-import './index.css'; // Ensure the CSS file is imported
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Code2,
+  Briefcase,
+  Mail,
+  Terminal,
+  User,
+  Github,
+  Linkedin,
+  Twitter,
+  Globe,
+  ArrowRight,
+  Download,
+  GraduationCap,
+  Award,
+  ChevronRight,
+  ExternalLink,
+  Send,
+  Phone,
+  MapPin,
+} from "lucide-react";
+import * as SimpleIcons from "simple-icons";
+import SkillsMarquee from "./components/magicui/SkillsMarquee";
+import { cn } from "./lib/utils"; // Corrected import path
+import "./index.css"; // Ensure the CSS file is imported
+import { motion, AnimatePresence } from "framer-motion";
+import educationData from './data/education.json';
+import certificationData from './data/certifications.json';
+import emailjs from '@emailjs/browser';
 
 const skills = [
-  { name: 'JavaScript', icon: 'devicon-javascript-plain colored', color: '#F7DF1E' },
-  { name: 'TypeScript', icon: 'devicon-typescript-plain colored', color: '#3178C6' },
-  { name: 'React.js', icon: 'devicon-react-original colored', color: '#61DAFB' },
-  { name: 'Node.js', icon: 'devicon-nodejs-plain colored', color: '#339933' },
-  { name: 'Python', icon: 'devicon-python-plain colored', color: '#3776AB' },
-  { name: 'MongoDB', icon: 'devicon-mongodb-plain colored', color: '#47A248' },
-  { name: 'PostgreSQL', icon: 'devicon-postgresql-plain colored', color: '#4169E1' },
-  { name: 'AWS Cloud', icon: 'devicon-amazonwebservices-plain colored', color: '#FF9900' },
-  { name: 'Docker', icon: 'devicon-docker-plain colored', color: '#2496ED' },
-  { name: 'CI/CD', icon: 'devicon-github-original colored', color: '#2088FF' },
-  { name: 'GraphQL', icon: 'devicon-graphql-plain colored', color: '#E10098' },
-  { name: 'Agile/Jira', icon: 'devicon-jira-plain colored', color: '#0052CC' }
+  {
+    name: "JavaScript",
+    icon: "devicon-javascript-plain colored",
+    color: "#F7DF1E",
+  },
+  {
+    name: "TypeScript",
+    icon: "devicon-typescript-plain colored",
+    color: "#3178C6",
+  },
+  {
+    name: "React.js",
+    icon: "devicon-react-original colored",
+    color: "#61DAFB",
+  },
+  { name: "Node.js", icon: "devicon-nodejs-plain colored", color: "#339933" },
+  { name: "Python", icon: "devicon-python-plain colored", color: "#3776AB" },
+  { name: "MongoDB", icon: "devicon-mongodb-plain colored", color: "#47A248" },
+  {
+    name: "PostgreSQL",
+    icon: "devicon-postgresql-plain colored",
+    color: "#4169E1",
+  },
+  {
+    name: "AWS Cloud",
+    icon: "devicon-amazonwebservices-plain colored",
+    color: "#FF9900",
+  },
+  { name: "Docker", icon: "devicon-docker-plain colored", color: "#2496ED" },
+  { name: "CI/CD", icon: "devicon-github-original colored", color: "#2088FF" },
+  { name: "GraphQL", icon: "devicon-graphql-plain colored", color: "#E10098" },
+  { name: "Agile/Jira", icon: "devicon-jira-plain colored", color: "#0052CC" },
 ];
 const services = [
   {
-    title: 'Full Stack Development',
-    description: 'End-to-end web application development with modern technologies and best practices.',
-    icon: <Code2 size={32} />
+    title: "Full Stack Development",
+    description:
+      "End-to-end web application development with modern technologies and best practices.",
+    icon: <Code2 size={32} />,
   },
   {
-    title: 'Backend Architecture',
-    description: 'Scalable and secure server-side solutions with optimized database design.',
-    icon: <Terminal size={32} />
+    title: "Backend Architecture",
+    description:
+      "Scalable and secure server-side solutions with optimized database design.",
+    icon: <Terminal size={32} />,
   },
   {
-    title: 'Frontend Development',
-    description: 'Responsive and interactive user interfaces with modern frameworks.',
-    icon: <Code2 size={32} />
+    title: "Frontend Development",
+    description:
+      "Responsive and interactive user interfaces with modern frameworks.",
+    icon: <Code2 size={32} />,
   },
   {
-    title: 'Database Design',
-    description: 'Efficient database architecture and optimization for scalable applications.',
-    icon: <Code2 size={32} />
-  }
+    title: "Database Design",
+    description:
+      "Efficient database architecture and optimization for scalable applications.",
+    icon: <Code2 size={32} />,
+  },
 ];
 
+// Update projects data with more details
 const projects = [
   {
-    title: 'E-Commerce Platform',
-    description: 'A full-featured online shopping platform with real-time inventory management.',
-    tech: 'React, Node.js, MongoDB',
-    image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&fit=crop&q=80'
+    title: "E-Commerce Platform",
+    description: "A full-featured online shopping platform with real-time inventory management, payment processing, and user authentication.",
+    tech: ["React", "Node.js", "MongoDB", "Stripe", "AWS"],
+    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&fit=crop&q=80",
+    liveLink: "https://your-project-demo.com",
+    githubLink: "https://github.com/yourusername/project",
+    features: [
+      "Real-time inventory tracking",
+      "Secure payment processing",
+      "User authentication & authorization",
+      "Admin dashboard",
+      "Order management system"
+    ]
   },
   {
-    title: 'Task Management System',
-    description: 'Collaborative project management tool with real-time updates.',
-    tech: 'TypeScript, React, Firebase',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80'
+    title: "Task Management System",
+    description: "A collaborative project management tool with real-time updates, team collaboration, and progress tracking.",
+    tech: ["TypeScript", "React", "Firebase", "Material-UI", "Redux"],
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80",
+    liveLink: "https://your-task-manager-demo.com",
+    githubLink: "https://github.com/yourusername/task-manager",
+    features: [
+      "Real-time task updates",
+      "Team collaboration",
+      "Progress tracking",
+      "File attachments",
+      "Task prioritization"
+    ]
   },
   {
-    title: 'Analytics Dashboard',
-    description: 'Real-time data visualization and analytics platform.',
-    tech: 'React, D3.js, Node.js',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80'
-  }
+    title: "Analytics Dashboard",
+    description: "A comprehensive data visualization and analytics platform for business intelligence and reporting.",
+    tech: ["React", "D3.js", "Node.js", "PostgreSQL", "Express"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
+    liveLink: "https://your-analytics-demo.com",
+    githubLink: "https://github.com/yourusername/analytics-dashboard",
+    features: [
+      "Interactive data visualization",
+      "Custom reporting",
+      "Real-time metrics",
+      "Data export capabilities",
+      "User role management"
+    ]
+  },
 ];
 
 const TypingEffect = () => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
-  const words = ["{Full Stack Developer}", "{Software Engineer}", "{Tech Enthusiast}"];
+  const words = [
+    "{Full Stack Developer}",
+    "{Software Engineer}",
+    "{Tech Enthusiast}",
+  ];
 
   useEffect(() => {
     const handleTyping = () => {
@@ -86,7 +168,7 @@ const TypingEffect = () => {
 
       if (!isDeleting && text === fullText) {
         setTimeout(() => setIsDeleting(true), 500);
-      } else if (isDeleting && text === '') {
+      } else if (isDeleting && text === "") {
         setIsDeleting(false);
         setLoopNum(loopNum + 1);
       }
@@ -97,19 +179,232 @@ const TypingEffect = () => {
     return () => clearTimeout(timer);
   }, [text, isDeleting, loopNum, typingSpeed, words]);
 
-  return (
-    <span className="typing-text text-[#29B475]">
-      {text}
-    </span>
-  );
+  return <span className="typing-text text-[#29B475]">{text}</span>;
 };
 
 const SkillCard = ({ name, icon, color }) => (
   <div className="flex items-center gap-2 text-sm md:text-base hover:bg-[#0A1917] p-2 rounded-md transition-all duration-300">
-    <div><i className={icon} style={{ color }}></i></div>
+    <div>
+      <i className={icon} style={{ color }}></i>
+    </div>
     <span>{name}</span>
   </div>
 );
+
+// Add animation utility function
+const useScrollAnimation = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return [ref, isVisible];
+};
+
+// Add animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+  hover: {
+    scale: 1.05,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut",
+    },
+  },
+};
+
+// Add ContactForm component before App component
+const ContactForm = () => {
+  const formRef = useRef();
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setSuccess(false);
+
+    // Log form data
+    console.log('Form Data:', form);
+
+    try {
+      const result = await emailjs.sendForm(
+        'service_3ui9vjd',
+        'template_n34phpq',
+        formRef.current,
+        'Jn0AEbV1BHC_XzPK0'
+      );
+      console.log('EmailJS Response:', result);
+      if (result.status === 200) {
+        setSuccess(true);
+        setForm({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+      } else {
+        throw new Error(`Unexpected status: ${result.status}`);
+      }
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setError(error.message || 'Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label htmlFor="name" className="text-sm font-medium text-gray-300">
+            Your Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 bg-[#0C1E1B] border border-[#29B475]/20 rounded-lg focus:border-[#29B475] focus:ring-1 focus:ring-[#29B475] text-gray-300 placeholder-gray-500 transition-all duration-300"
+            placeholder="John Doe"
+          />
+        </div>
+        <div className="space-y-2">
+          <label htmlFor="email" className="text-sm font-medium text-gray-300">
+            Your Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 bg-[#0C1E1B] border border-[#29B475]/20 rounded-lg focus:border-[#29B475] focus:ring-1 focus:ring-[#29B475] text-gray-300 placeholder-gray-500 transition-all duration-300"
+            placeholder="john@example.com"
+          />
+        </div>
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="subject" className="text-sm font-medium text-gray-300">
+          Subject
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          value={form.subject}
+          onChange={handleChange}
+          required
+          className="w-full px-4 py-3 bg-[#0C1E1B] border border-[#29B475]/20 rounded-lg focus:border-[#29B475] focus:ring-1 focus:ring-[#29B475] text-gray-300 placeholder-gray-500 transition-all duration-300"
+          placeholder="What's this about?"
+        />
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="message" className="text-sm font-medium text-gray-300">
+          Message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          value={form.message}
+          onChange={handleChange}
+          required
+          rows="5"
+          className="w-full px-4 py-3 bg-[#0C1E1B] border border-[#29B475]/20 rounded-lg focus:border-[#29B475] focus:ring-1 focus:ring-[#29B475] text-gray-300 placeholder-gray-500 transition-all duration-300 resize-none"
+          placeholder="Your message here..."
+        ></textarea>
+      </div>
+      {error && (
+        <div className="text-red-500 text-sm">{error}</div>
+      )}
+      {success && (
+        <div className="text-[#29B475] text-sm">Message sent successfully!</div>
+      )}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full bg-[#29B475] text-white px-6 py-3 rounded-lg hover:bg-[#29B475]/90 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {loading ? (
+          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+        ) : (
+          <>
+            Send Message <Send className="w-5 h-5" />
+          </>
+        )}
+      </button>
+    </form>
+  );
+};
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -120,40 +415,102 @@ function App() {
       setScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
     setMenuOpen(false);
   };
 
   const handleDownloadCV = () => {
     // Replace this URL with your actual CV file URL
-    const cvUrl = '/path-to-your-cv.pdf';
-    window.open(cvUrl, '_blank');
+    const cvUrl = "";
+    window.open(cvUrl, "_blank");
   };
+
+  // Add smooth scroll behavior
+  useEffect(() => {
+    // Add smooth scroll behavior to the entire page
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Optional: Add a custom scroll animation
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (sectionTop < windowHeight * 0.75) {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+        }
+      });
+    };
+
+    // Add initial styles to sections
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(20px)';
+      section.style.transition = 'all 0.6s ease-out';
+    });
+
+    window.addEventListener('scroll', handleScroll);
+    // Trigger once on load
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+  }, []);
 
   return (
     <div className=" bg-[#0C1E1B] text-white font-mono">
       {/* Navbar */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#0A1917]/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-        }`}>
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="text-[#29B475] font-bold text-lg md:text-xl hover:scale-105 transition-transform cursor-pointer logo-font">
-              <span className="font-mono">{`<`}</span>
+      <nav
+        className={`fixed transition-all duration-500 z-50 ${
+          scrolled
+            ? "bottom-6 left-4 right-4 rounded-lg"
+            : "top-0 w-full bg-gradient-to-b from-[#0C1E1B]/80 to-transparent backdrop-blur-sm"
+        }`}
+      >
+        <div className="max-w-5xl mx-auto">
+          <div
+            className={`flex items-center justify-between h-16 ${
+              scrolled
+                ? "glass-navbar px-6 border border-[#29B475] rounded-xl"
+                : "px-6"
+            }`}
+          >
+            <button
+              onClick={(e) => {
+                const element = document.getElementById("home");
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className={`text-[#29B475] font-bold transition-all duration-300 ${
+                scrolled ? "text-lg md:text-xl" : "text-xl md:text-2xl hover:text-[#2BCB8A]"
+              } hover:scale-105 transition-transform cursor-pointer logo-font`}
+            >
+              <span className="font-mono opacity-80">{`<`}</span>
               Bhargav Sri Ram
-              <span className="font-mono">{`/>`}</span>
-            </div>
+              <span className="font-mono opacity-80">{`/>`}</span>
+            </button>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-[#29B475]"
+              className={`md:hidden px-3 py-2 rounded-xl transition-all duration-300 ${
+                scrolled
+                  ? "bg-[#1E1E1E] hover:bg-[#2A2A2A] text-[#29B475]"
+                  : "bg-[#29B475]/10 hover:bg-[#29B475]/20 text-[#29B475]"
+              }`}
               onClick={() => setMenuOpen(!menuOpen)}
             >
               {menuOpen ? (
@@ -164,38 +521,54 @@ function App() {
             </button>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex space-x-4">
               {[
-                { name: 'About', id: 'about' },
-                { name: 'Services', id: 'services' },
-                { name: 'Portfolio', id: 'portfolio' },
-                { name: 'Contact', id: 'contact' }
+                { name: "About", id: "about" },
+                { name: "Services", id: "services" },
+                { name: "Education", id: "education" },
+                { name: "Projects", id: "projects" },
+                { name: "Contact", id: "contact" },
               ].map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-gray-300 hover:text-[#29B475] transition-colors duration-300 font-mono relative group"
+                  className={`px-4 py-2 rounded-xl transition-all duration-300 font-mono flex items-center justify-center ${
+                    scrolled
+                      ? "hover:bg-[#29B475] text-white hover:text-[#ffffff]"
+                      : "text-[#29B475] hover:bg-[#29B475]/10 hover:text-[#2BCB8A]"
+                  }`}
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#29B475] transition-all duration-300 group-hover:w-full"></span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Mobile Menu */}
-          <div className={`md:hidden absolute left-0 right-0 bg-[#0A1917] shadow-lg transition-all duration-300 ${menuOpen ? 'max-h-64 py-4' : 'max-h-0'
-            } overflow-hidden`}>
+          <div
+            className={`md:hidden absolute left-0 right-0 transition-all duration-300 ${
+              menuOpen ? "max-h-64 py-4" : "max-h-0"
+            } overflow-hidden ${
+              scrolled
+                ? "bg-[#0A1917] shadow-lg"
+                : "bg-[#0A1917]/95 backdrop-blur-sm border-t border-[#29B475]/20"
+            }`}
+          >
             {[
-              { name: 'About', id: 'about' },
-              { name: 'Services', id: 'services' },
-              { name: 'Portfolio', id: 'portfolio' },
-              { name: 'Contact', id: 'contact' }
+              { name: "About", id: "about" },
+              { name: "Services", id: "services" },
+              { name: "Education", id: "education" },
+              { name: "Projects", id: "projects" },
+              { name: "Contact", id: "contact" },
             ].map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left px-4 py-2 text-gray-300 hover:text-[#29B475] hover:bg-[#0C1E1B]/50 transition-colors"
+                className={`block w-full text-left px-4 py-2 my-1 mx-4 transition-all duration-300 ${
+                  scrolled
+                    ? "bg-[#1E1E1E] hover:bg-[#2A2A2A] text-gray-300 hover:text-[#29B475] rounded-lg"
+                    : "hover:bg-[#29B475]/10 text-[#29B475] hover:text-[#2BCB8A] rounded-lg"
+                }`}
               >
                 {item.name}
               </button>
@@ -206,12 +579,16 @@ function App() {
 
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="min-h-screen w-full px-4 py-8 max-w-7xl mx-auto">
+        <section
+          id="home"
+          className="min-h-screen w-full px-4 py-8 max-w-7xl mx-auto"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Content Column */}
             <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6">
               <p className="text-[#29B475] animate-fadeIn flex items-center gap-2">
-                Hi <span className="animate-wave inline-block">👋</span>, my name is
+                Hi <span className="animate-wave inline-block">👋</span>, my
+                name is
               </p>
 
               <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">
@@ -226,7 +603,8 @@ function App() {
               </div>
 
               <p className="text-lg text-gray-300 max-w-xl">
-                Passionate about creating innovative web solutions and turning complex problems into elegant interfaces.
+                Passionate about creating innovative web solutions and turning
+                complex problems into elegant interfaces.
               </p>
 
               {/* Buttons and Social Links Container */}
@@ -251,7 +629,7 @@ function App() {
                 {/* Social Links */}
                 <div className="flex justify-center md:justify-start gap-6">
                   <a
-                    href="https://github.com"
+                    href="https://github.com/sriram1224"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-[#29B475] transition-colors"
@@ -259,7 +637,7 @@ function App() {
                     <Github className="w-6 h-6" />
                   </a>
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/kasukurthi-bhargav-781a88227/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-[#29B475] transition-colors"
@@ -267,7 +645,7 @@ function App() {
                     <Linkedin className="w-6 h-6" />
                   </a>
                   <a
-                    href="https://twitter.com"
+                    href="https://x.com/Bhargavsriram5"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-[#29B475] transition-colors"
@@ -301,32 +679,43 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
               <div>
                 <p className="text-gray-300 mb-6 text-sm md:text-base">
-                  With over 5 years of experience in full-stack development, I specialize in building scalable web applications that solve real-world problems. My approach combines technical expertise with creative problem-solving to deliver exceptional user experiences.
+                  With over 5 years of experience in full-stack development, I
+                  specialize in building scalable web applications that solve
+                  real-world problems. My approach combines technical expertise
+                  with creative problem-solving to deliver exceptional user
+                  experiences.
                 </p>
-
-
-
-
                 <SkillsMarquee />
-
-
-
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-[#0C1E1B] p-4 md:p-6 rounded-lg">
-                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">5+</h3>
-                  <p className="text-gray-300 text-sm md:text-base">Years of Experience</p>
+                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">
+                    5+
+                  </h3>
+                  <p className="text-gray-300 text-sm md:text-base">
+                    Years of Experience
+                  </p>
                 </div>
                 <div className="bg-[#0C1E1B] p-4 md:p-6 rounded-lg">
-                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">50+</h3>
-                  <p className="text-gray-300 text-sm md:text-base">Projects Completed</p>
+                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">
+                    50+
+                  </h3>
+                  <p className="text-gray-300 text-sm md:text-base">
+                    Projects Completed
+                  </p>
                 </div>
                 <div className="bg-[#0C1E1B] p-4 md:p-6 rounded-lg">
-                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">30+</h3>
-                  <p className="text-gray-300 text-sm md:text-base">Happy Clients</p>
+                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">
+                    30+
+                  </h3>
+                  <p className="text-gray-300 text-sm md:text-base">
+                    Happy Clients
+                  </p>
                 </div>
                 <div className="bg-[#0C1E1B] p-4 md:p-6 rounded-lg">
-                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">15+</h3>
+                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">
+                    15+
+                  </h3>
                 </div>
               </div>
             </div>
@@ -347,7 +736,9 @@ function App() {
                   className="bg-[#0C1E1B] p-6 rounded-lg text-center transition-transform hover:scale-105"
                 >
                   <div className="text-[#29B475] mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {service.title}
+                  </h3>
                   <p className="text-gray-300 text-sm">{service.description}</p>
                 </div>
               ))}
@@ -355,102 +746,452 @@ function App() {
           </div>
         </section>
 
+        {/* Update Education & Certification Section */}
+        <section id="education" className="py-16 md:py-20 px-4 bg-[#0A1917]">
+          <div className="max-w-7xl mx-auto">
+            <motion.h2 
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-2xl md:text-3xl font-bold mb-12 text-center flex items-center justify-center gap-2"
+            >
+              <GraduationCap className="text-[#29B475]" />
+              <span>Education & Certifications</span>
+            </motion.h2>
 
-        {/* Portfolio Section */}
-        <section id="portfolio" className="py-16 md:py-20 px-4 bg-[#0A1917]">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center flex items-center justify-center gap-2">
-              <Terminal className="text-[#29B475]" />
-              <span>Portfolio</span>
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-              {projects.map((project, index) => (
-                <div
-                  key={project.title}
-                  className="group relative overflow-hidden rounded-lg transition-all duration-300"
-                  style={{
-                    animation: `fadeIn 0.5s ease-out forwards ${index * 0.1}s`,
-                  }}
-                >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 md:h-64 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0C1E1B] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
-                    <h3 className="text-lg md:text-xl font-bold mb-2">{project.title}</h3>
-                    <p className="text-[#29B475] mb-2 text-sm md:text-base">{project.tech}</p>
-                    <p className="text-gray-300 text-sm md:text-base">{project.description}</p>
-                    <a href="#" className="text-[#29B475] mt-4 flex items-center gap-2 hover:gap-3 transition-all text-sm md:text-base">
-                      View Project <ArrowRight size={20} />
-                    </a>
-                  </div>
+            {/* Education Section - Horizontal Cards with Parallax */}
+            <div className="mb-20">
+              <motion.h3 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-xl font-semibold mb-8 text-[#29B475] text-center"
+              >
+                Education Journey
+              </motion.h3>
+
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              >
+                {educationData.education.map((edu, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    whileHover="hover"
+                    className="relative"
+                  >
+                    <motion.div
+                      variants={cardVariants}
+                      className="bg-[#0C1E1B] p-6 rounded-xl border border-[#29B475]/20 hover:border-[#29B475] h-full"
+                    >
+                      <div className="flex flex-col h-full">
+                        <div className="text-[#29B475] mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                          <GraduationCap size={24} />
+                        </div>
+                        <h4 className="text-lg font-semibold mb-2">{edu.degree}</h4>
+                        <p className="text-gray-300 mb-1">{edu.institution}</p>
+                        <p className="text-[#29B475] text-sm mb-2">{edu.year}</p>
+                        <p className="text-gray-400 text-sm mb-4">{edu.description}</p>
+
+                        {/* Achievements */}
+                        <div className="mb-4">
+                          <h5 className="text-[#29B475] text-sm font-semibold mb-2">Key Achievements:</h5>
+                          <ul className="space-y-1">
+                            {edu.achievements.map((achievement, i) => (
+                              <li key={i} className="text-gray-300 text-sm flex items-center gap-2">
+                                <ChevronRight size={14} className="text-[#29B475]" />
+                                {achievement}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Relevant Courses */}
+                        <div className="mt-auto">
+                          <h5 className="text-[#29B475] text-sm font-semibold mb-2">Relevant Courses:</h5>
+                          <div className="flex flex-wrap gap-2">
+                            {edu.relevantCourses.map((course, i) => (
+                              <span
+                                key={i}
+                                className="bg-[#0A1917] text-[#29B475] px-2 py-1 rounded-full text-xs"
+                              >
+                                {course}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Decorative Elements */}
+                        <div className="absolute top-0 right-0 w-20 h-20 bg-[#29B475]/5 rounded-bl-full -z-10"></div>
+                        <div className="absolute bottom-0 left-0 w-20 h-20 bg-[#29B475]/5 rounded-tr-full -z-10"></div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Certifications Section - Interactive Timeline */}
+            <div>
+              <motion.h3 
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-xl font-semibold mb-12 text-[#29B475] text-center"
+              >
+                Professional Certifications
+              </motion.h3>
+
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="relative"
+              >
+                {/* Timeline Line */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#29B475]/20"></div>
+
+                <div className="space-y-12">
+                  {certificationData.certifications.map((cert, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className={`relative flex items-center ${
+                        index % 2 === 0 ? "justify-start" : "justify-end"
+                      }`}
+                    >
+                      {/* Timeline Dot */}
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: index * 0.2 }}
+                        className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-[#29B475] z-10"
+                      ></motion.div>
+
+                      {/* Content Card */}
+                      <motion.div
+                        variants={cardVariants}
+                        whileHover="hover"
+                        className={`w-[calc(50%-2rem)] bg-[#0C1E1B] p-6 rounded-xl border border-[#29B475]/20 hover:border-[#29B475] transform transition-all duration-300 ${
+                          index % 2 === 0 ? "hover:-translate-x-2" : "hover:translate-x-2"
+                        }`}
+                      >
+                        <div className="flex flex-col">
+                          <div className="flex items-start gap-4 mb-4">
+                            <motion.div
+                              whileHover={{ rotate: 360 }}
+                              transition={{ duration: 0.5 }}
+                              className="text-[#29B475] mt-1"
+                            >
+                              <Award size={24} />
+                            </motion.div>
+                            <div>
+                              <h4 className="text-lg font-semibold mb-2">{cert.title}</h4>
+                              <p className="text-gray-300 mb-1">{cert.issuer}</p>
+                              <p className="text-[#29B475] text-sm mb-2">{cert.year}</p>
+                              <motion.p
+                                whileHover={{ scale: 1.05 }}
+                                className="text-gray-400 text-sm inline-block"
+                              >
+                                Credential ID: {cert.credentialId}
+                              </motion.p>
+                            </div>
+                          </div>
+
+                          {/* Description */}
+                          <p className="text-gray-300 text-sm mb-4">{cert.description}</p>
+
+                          {/* Skills */}
+                          <div className="mb-4">
+                            <h5 className="text-[#29B475] text-sm font-semibold mb-2">Skills Acquired:</h5>
+                            <div className="flex flex-wrap gap-2">
+                              {cert.skills.map((skill, i) => (
+                                <span
+                                  key={i}
+                                  className="bg-[#0A1917] text-[#29B475] px-2 py-1 rounded-full text-xs"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Validity and Verification */}
+                          <div className="flex items-center justify-between mt-auto">
+                            <span className="text-gray-400 text-sm">Valid for: {cert.validity}</span>
+                            <a
+                              href={cert.verificationUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[#29B475] text-sm hover:text-[#29B475]/80 transition-colors flex items-center gap-1"
+                            >
+                              Verify <ExternalLink size={14} />
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Hover Effect Border */}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          whileHover={{ opacity: 1 }}
+                          className="absolute inset-0 border-2 border-[#29B475] rounded-xl pointer-events-none"
+                        ></motion.div>
+                      </motion.div>
+                    </motion.div>
+                  ))}
                 </div>
-              ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Replace Portfolio Section with Projects Section */}
+        <section id="projects" className="py-16 md:py-20 px-4 bg-[#0A1917] overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center flex items-center justify-center gap-2">
+              <Terminal className="text-[#29B475]" />
+              <span>Projects</span>
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, index) => {
+                const [ref, isVisible] = useScrollAnimation();
+                return (
+                  <div
+                    key={project.title}
+                    ref={ref}
+                    className={`transform ${
+                      isVisible
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-10 opacity-0"
+                    } transition-all duration-700 ease-out`}
+                  >
+                    <div className="group relative bg-[#0C1E1B] rounded-xl overflow-hidden border border-[#29B475]/20 hover:border-[#29B475] transition-all duration-300 h-full flex flex-col">
+                      {/* Project Image with Overlay */}
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0C1E1B] via-[#0C1E1B]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        
+                        {/* Tech Stack Tags */}
+                        <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                          {project.tech.slice(0, 3).map((tech, i) => (
+                            <span
+                              key={i}
+                              className="bg-[#0A1917]/90 backdrop-blur-sm text-[#29B475] px-2 py-1 rounded-full text-xs font-medium transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
+                              style={{ transitionDelay: `${i * 100}ms` }}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Project Content */}
+                      <div className="p-6 flex-grow flex flex-col">
+                        <h3 className="text-xl font-bold mb-3 group-hover:text-[#29B475] transition-colors duration-300">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-300 text-sm mb-4 flex-grow">
+                          {project.description}
+                        </p>
+
+                        {/* Features List */}
+                        <div className="mb-6">
+                          <ul className="space-y-2">
+                            {project.features.slice(0, 3).map((feature, i) => (
+                              <li
+                                key={i}
+                                className="flex items-center text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300"
+                              >
+                                <span className="text-[#29B475] mr-2">•</span>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex gap-3 mt-auto">
+                          <a
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-[#29B475] text-white px-4 py-2 rounded-lg hover:bg-[#29B475]/90 transition-colors flex items-center justify-center gap-2 text-sm group-hover:scale-105 transform transition-transform duration-300"
+                          >
+                            Live Demo
+                            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+                          </a>
+                          <a
+                            href={project.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 border border-[#29B475] text-[#29B475] px-4 py-2 rounded-lg hover:bg-[#29B475] hover:text-white transition-colors flex items-center justify-center gap-2 text-sm group-hover:scale-105 transform transition-transform duration-300"
+                          >
+                            <Github size={16} />
+                            Code
+                          </a>
+                        </div>
+
+                        {/* View More Button */}
+                        {project.features.length > 3 && (
+                          <button
+                            onClick={() => {
+                              // Add your modal or expand functionality here
+                              console.log("View more features for:", project.title);
+                            }}
+                            className="mt-4 text-[#29B475] text-sm hover:text-[#29B475]/80 transition-colors duration-300 flex items-center justify-center gap-1 group-hover:scale-105 transform transition-transform duration-300"
+                          >
+                            View More Features
+                            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Hover Effect Border */}
+                      <div className="absolute inset-0 border-2 border-[#29B475] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-20 px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center flex items-center justify-center gap-2">
+        <section id="contact" className="py-16 md:py-20 px-4 bg-[#0A1917]">
+          <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-2xl md:text-3xl font-bold mb-12 text-center flex items-center justify-center gap-2"
+            >
               <Mail className="text-[#29B475]" />
               <span>Get in Touch</span>
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-              <div>
-                <h3 className="text-lg md:text-xl font-bold mb-4">Contact Information</h3>
-                <div className="space-y-4">
-                  <p className="flex items-center gap-3 text-sm md:text-base">
-                    <Mail className="text-[#29B475]" />
-                    hello@example.com
-                  </p>
-                  <p className="flex items-center gap-3 text-sm md:text-base">
-                    <Globe className="text-[#29B475]" />
-                    www.example.com
+            </motion.h2>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Contact Information */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="space-y-8"
+              >
+                <div>
+                  <h3 className="text-xl font-semibold mb-6 text-[#29B475]">Let's Connect</h3>
+                  <p className="text-gray-300 mb-8">
+                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
                   </p>
                 </div>
-                <div className="mt-8">
-                  <h4 className="text-base md:text-lg font-bold mb-4">Follow Me</h4>
-                  <div className="flex space-x-4">
-                    <a href="#" className="text-gray-400 hover:text-[#29B475] transition-colors">
-                      <Github size={24} />
+
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-[#0C1E1B] p-3 rounded-lg">
+                      <Mail className="w-6 h-6 text-[#29B475]" />
+                    </div>
+                    <div>
+                      <h4 className="text-gray-300 font-medium mb-1">Email</h4>
+                      <a 
+                        href="mailto:kasukurthibhargav@gmail.com"
+                        className="text-[#29B475] hover:underline"
+                      >
+                        kasukurthibhargav@gmail.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-[#0C1E1B] p-3 rounded-lg">
+                      <Phone className="w-6 h-6 text-[#29B475]" />
+                    </div>
+                    <div>
+                      <h4 className="text-gray-300 font-medium mb-1">Phone</h4>
+                      <a 
+                        href="tel:+1234567890"
+                        className="text-[#29B475] hover:underline"
+                      >
+                        +1 (234) 567-890
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-[#0C1E1B] p-3 rounded-lg">
+                      <MapPin className="w-6 h-6 text-[#29B475]" />
+                    </div>
+                    <div>
+                      <h4 className="text-gray-300 font-medium mb-1">Location</h4>
+                      <p className="text-[#29B475]">
+                        Hyderabad, India
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Social Links */}
+                <div className="pt-6">
+                  <h4 className="text-gray-300 font-medium mb-4">Connect with me</h4>
+                  <div className="flex gap-4">
+                    <a
+                      href="https://github.com/sriram1224"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-[#0C1E1B] p-3 rounded-lg text-gray-400 hover:text-[#29B475] transition-colors"
+                    >
+                      <Github className="w-6 h-6" />
                     </a>
-                    <a href="#" className="text-gray-400 hover:text-[#29B475] transition-colors">
-                      <Linkedin size={24} />
+                    <a
+                      href="https://www.linkedin.com/in/kasukurthi-bhargav-781a88227/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-[#0C1E1B] p-3 rounded-lg text-gray-400 hover:text-[#29B475] transition-colors"
+                    >
+                      <Linkedin className="w-6 h-6" />
                     </a>
-                    <a href="#" className="text-gray-400 hover:text-[#29B475] transition-colors">
-                      <Twitter size={24} />
+                    <a
+                      href="https://x.com/Bhargavsriram5"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-[#0C1E1B] p-3 rounded-lg text-gray-400 hover:text-[#29B475] transition-colors"
+                    >
+                      <Twitter className="w-6 h-6" />
                     </a>
                   </div>
                 </div>
-              </div>
-              <form className="space-y-4 md:space-y-6">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full bg-[#0C1E1B] border border-[#29B475]/20 rounded-lg p-3 focus:border-[#29B475] outline-none transition-colors text-sm md:text-base"
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full bg-[#0C1E1B] border border-[#29B475]/20 rounded-lg p-3 focus:border-[#29B475] outline-none transition-colors text-sm md:text-base"
-                />
-                <textarea
-                  placeholder="Message"
-                  rows={6}
-                  className="w-full bg-[#0C1E1B] border border-[#29B475]/20 rounded-lg p-3 focus:border-[#29B475] outline-none transition-colors text-sm md:text-base"
-                ></textarea>
-                <button className="w-full bg-[#29B475] text-white py-3 px-6 rounded-lg hover:bg-[#29B475]/90 transition-colors flex items-center justify-center gap-2 text-sm md:text-base">
-                  Send Message <ArrowRight size={20} />
-                </button>
-              </form>
+              </motion.div>
+
+              {/* Contact Form */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="bg-[#0C1E1B] p-8 rounded-xl border border-[#29B475]/20"
+              >
+                <h3 className="text-xl font-semibold mb-6 text-[#29B475]">Send me a message</h3>
+                <ContactForm />
+              </motion.div>
             </div>
           </div>
         </section>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }
 

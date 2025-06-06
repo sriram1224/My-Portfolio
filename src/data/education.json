@@ -1,0 +1,39 @@
+{
+  "education": [
+    {
+      "degree": "Bachelor of Technology in Computer Science",
+      "institution": "Lovely Professional University",
+      "year": "2019 - 2023",
+      "description": "Specialized in Software Development and Data Structures. Achieved a CGPA of 8.0/10. Participated in various coding competitions and hackathons.",
+      "icon": "GraduationCap",
+      "achievements": [
+        "Dean's List for Academic Excellence",
+        "First Prize in University Hackathon",
+        "Active member of Coding Club"
+      ],
+      "relevantCourses": [
+        "Data Structures and Algorithms",
+        "Database Management Systems",
+        "Web Development",
+        "Machine Learning"
+      ]
+    },
+    {
+      "degree": "Higher Secondary Education",
+      "institution": "Your School Name",
+      "year": "2017 - 2019",
+      "description": "Completed with distinction in Science stream. Focused on Mathematics and Computer Science.",
+      "icon": "GraduationCap",
+      "achievements": [
+        "School Topper in Computer Science",
+        "Represented school in Science Exhibition"
+      ],
+      "relevantCourses": [
+        "Mathematics",
+        "Physics",
+        "Computer Science",
+        "English"
+      ]
+    }
+  ]
+} 
