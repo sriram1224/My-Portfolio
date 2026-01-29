@@ -33,18 +33,18 @@ const Marquee = ({
 };
 
 const skills = [
+    { name: 'Java', icon: 'devicon-java-plain colored', color: '#007396' },
+    { name: 'Spring Boot', icon: 'devicon-spring-plain colored', color: '#6DB33F' },
     { name: 'JavaScript', icon: 'devicon-javascript-plain colored', color: '#F7DF1E' },
-    { name: 'TypeScript', icon: 'devicon-typescript-plain colored', color: '#3178C6' },
     { name: 'React.js', icon: 'devicon-react-original colored', color: '#61DAFB' },
-    { name: 'Node.js', icon: 'devicon-nodejs-plain colored', color: '#339933' },
-    { name: 'Python', icon: 'devicon-python-plain colored', color: '#3776AB' },
-    { name: 'MongoDB', icon: 'devicon-mongodb-plain colored', color: '#47A248' },
     { name: 'PostgreSQL', icon: 'devicon-postgresql-plain colored', color: '#4169E1' },
-    { name: 'AWS Cloud', icon: 'devicon-amazonwebservices-plain colored', color: '#FF9900' },
+    { name: 'MySQL', icon: 'devicon-mysql-plain colored', color: '#4479A1' },
+    { name: 'MongoDB', icon: 'devicon-mongodb-plain colored', color: '#47A248' },
     { name: 'Docker', icon: 'devicon-docker-plain colored', color: '#2496ED' },
-    { name: 'CI/CD', icon: 'devicon-github-original colored', color: '#2088FF' },
-    { name: 'GraphQL', icon: 'devicon-graphql-plain colored', color: '#E10098' },
-    { name: 'DevOps', icon: 'devicon-jira-plain colored', color: '#0052CC' }
+    { name: 'Git', icon: 'devicon-git-plain colored', color: '#F05032' },
+    { name: 'HTML5', icon: 'devicon-html5-plain colored', color: '#E34F26' },
+    { name: 'CSS3', icon: 'devicon-css3-plain colored', color: '#1572B6' },
+    { name: 'Linux', icon: 'devicon-linux-plain colored', color: '#FCC624' }
 ];
 
 const SkillCard = ({ name, icon, color }) => (

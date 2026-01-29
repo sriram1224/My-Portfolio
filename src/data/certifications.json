@@ -1,52 +1,55 @@
 {
   "certifications": [
     {
-      "title": "AWS Certified Solutions Architect",
-      "issuer": "Amazon Web Services",
-      "year": "2023",
-      "credentialId": "AWS-123456",
+      "title": "Full Stack Web Development Specialization",
+      "issuer": "Geekster",
+      "year": "January 2024",
+      "credentialId": "GEEK-FSWD-2024",
       "icon": "Award",
-      "description": "Professional certification for designing distributed systems on AWS",
+      "description": "Comprehensive training focused on Java backend development and REST API design with Spring Boot",
       "skills": [
-        "Cloud Architecture",
-        "AWS Services",
-        "Security",
-        "High Availability"
-      ],
-      "validity": "3 years",
-      "verificationUrl": "https://aws.amazon.com/verification"
-    },
-    {
-      "title": "Full Stack Web Development",
-      "issuer": "Meta",
-      "year": "2023",
-      "credentialId": "META-789012",
-      "icon": "Award",
-      "description": "Comprehensive full-stack development certification covering modern web technologies",
-      "skills": [
-        "React.js",
-        "Node.js",
-        "MongoDB",
-        "Express.js"
+        "Java",
+        "Spring Boot",
+        "REST APIs",
+        "SQL Databases",
+        "JWT Authentication"
       ],
       "validity": "Lifetime",
-      "verificationUrl": "https://meta.com/verify"
+      "verificationUrl": "https://geekster.in/verify"
     },
     {
-      "title": "Google Cloud Professional Developer",
-      "issuer": "Google Cloud",
-      "year": "2023",
-      "credentialId": "GCP-345678",
+      "title": "Core and Advanced Java",
+      "issuer": "Geekster",
+      "year": "July 2023",
+      "credentialId": "GEEK-JAVA-2023",
       "icon": "Award",
-      "description": "Advanced certification for building scalable and reliable applications using Google Cloud",
+      "description": "In-depth training on Java programming covering core concepts and advanced features",
       "skills": [
-        "Google Cloud Platform",
-        "Cloud Architecture",
-        "DevOps",
-        "Security"
+        "Java Fundamentals",
+        "Object-Oriented Programming",
+        "Collections Framework",
+        "Exception Handling",
+        "Multithreading"
       ],
-      "validity": "2 years",
-      "verificationUrl": "https://cloud.google.com/verify"
+      "validity": "Lifetime",
+      "verificationUrl": "https://geekster.in/verify"
+    },
+    {
+      "title": "Data Structures and Algorithms",
+      "issuer": "Geekster",
+      "year": "July 2023",
+      "credentialId": "GEEK-DSA-2023",
+      "icon": "Award",
+      "description": "Comprehensive training on data structures and algorithms for efficient problem solving",
+      "skills": [
+        "Data Structures",
+        "Algorithms",
+        "Problem Solving",
+        "Time Complexity",
+        "Space Optimization"
+      ],
+      "validity": "Lifetime",
+      "verificationUrl": "https://geekster.in/verify"
     }
   ]
-} 
+}

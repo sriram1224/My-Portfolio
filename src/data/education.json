@@ -1,39 +1,39 @@
 {
   "education": [
     {
-      "degree": "Bachelor of Technology in Computer Science",
-      "institution": "Lovely Professional University",
-      "year": "2019 - 2023",
-      "description": "Specialized in Software Development and Data Structures. Achieved a CGPA of 8.0/10. Participated in various coding competitions and hackathons.",
+      "degree": "Bachelor of Technology in Computer Science and Engineering",
+      "institution": "Lovely Professional University, Phagwara, Punjab",
+      "year": "August 2021 - June 2025",
+      "description": "Pursuing BTech in Computer Science with focus on backend development, database systems, and software architecture.",
       "icon": "GraduationCap",
       "achievements": [
-        "Dean's List for Academic Excellence",
-        "First Prize in University Hackathon",
-        "Active member of Coding Club"
+        "Completed Backend Development Internship",
+        "Built multiple Spring Boot projects",
+        "Strong foundation in Java and REST APIs"
       ],
       "relevantCourses": [
         "Data Structures and Algorithms",
         "Database Management Systems",
-        "Web Development",
-        "Machine Learning"
+        "Software Engineering",
+        "Backend System Design"
       ]
     },
     {
-      "degree": "Higher Secondary Education",
-      "institution": "Your School Name",
-      "year": "2017 - 2019",
-      "description": "Completed with distinction in Science stream. Focused on Mathematics and Computer Science.",
+      "degree": "Intermediate Education (State Board)",
+      "institution": "SASI Junior College, Nallajerla, Andhra Pradesh",
+      "year": "June 2019 - March 2021",
+      "description": "Completed intermediate education with focus on Mathematics and Computer Science.",
       "icon": "GraduationCap",
       "achievements": [
-        "School Topper in Computer Science",
-        "Represented school in Science Exhibition"
+        "Strong academic performance",
+        "Foundation in programming concepts"
       ],
       "relevantCourses": [
         "Mathematics",
         "Physics",
         "Computer Science",
-        "English"
+        "Chemistry"
       ]
     }
   ]
-} 
+}

@@ -32,111 +32,83 @@ import certificationData from './data/certifications.json';
 import emailjs from '@emailjs/browser';
 
 const skills = [
+  { name: "Java", icon: "devicon-java-plain colored", color: "#007396" },
+  { name: "Spring Boot", icon: "devicon-spring-plain colored", color: "#6DB33F" },
   {
     name: "JavaScript",
     icon: "devicon-javascript-plain colored",
     color: "#F7DF1E",
   },
   {
-    name: "TypeScript",
-    icon: "devicon-typescript-plain colored",
-    color: "#3178C6",
-  },
-  {
     name: "React.js",
     icon: "devicon-react-original colored",
     color: "#61DAFB",
   },
-  { name: "Node.js", icon: "devicon-nodejs-plain colored", color: "#339933" },
-  { name: "Python", icon: "devicon-python-plain colored", color: "#3776AB" },
+  { name: "PostgreSQL", icon: "devicon-postgresql-plain colored", color: "#4169E1" },
+  { name: "MySQL", icon: "devicon-mysql-plain colored", color: "#4479A1" },
   { name: "MongoDB", icon: "devicon-mongodb-plain colored", color: "#47A248" },
-  {
-    name: "PostgreSQL",
-    icon: "devicon-postgresql-plain colored",
-    color: "#4169E1",
-  },
-  {
-    name: "AWS Cloud",
-    icon: "devicon-amazonwebservices-plain colored",
-    color: "#FF9900",
-  },
   { name: "Docker", icon: "devicon-docker-plain colored", color: "#2496ED" },
-  { name: "CI/CD", icon: "devicon-github-original colored", color: "#2088FF" },
-  { name: "GraphQL", icon: "devicon-graphql-plain colored", color: "#E10098" },
-  { name: "Agile/Jira", icon: "devicon-jira-plain colored", color: "#0052CC" },
+  { name: "Git", icon: "devicon-git-plain colored", color: "#F05032" },
+  { name: "HTML5", icon: "devicon-html5-plain colored", color: "#E34F26" },
+  { name: "CSS3", icon: "devicon-css3-plain colored", color: "#1572B6" },
+  { name: "Linux", icon: "devicon-linux-plain colored", color: "#FCC624" },
 ];
 const services = [
   {
-    title: "Full Stack Development",
+    title: "Backend Development",
     description:
-      "End-to-end web application development with modern technologies and best practices.",
-    icon: <Code2 size={32} />,
-  },
-  {
-    title: "Backend Architecture",
-    description:
-      "Scalable and secure server-side solutions with optimized database design.",
+      "Building robust REST APIs with Spring Boot, implementing layered architecture and secure authentication.",
     icon: <Terminal size={32} />,
-  },
-  {
-    title: "Frontend Development",
-    description:
-      "Responsive and interactive user interfaces with modern frameworks.",
-    icon: <Code2 size={32} />,
   },
   {
     title: "Database Design",
     description:
-      "Efficient database architecture and optimization for scalable applications.",
+      "Designing and optimizing relational databases with PostgreSQL, MySQL using JPA/Hibernate.",
+    icon: <Code2 size={32} />,
+  },
+  {
+    title: "API Security",
+    description:
+      "Implementing JWT authentication, role-based access control, and secure API endpoints.",
+    icon: <Code2 size={32} />,
+  },
+  {
+    title: "Full Stack Development",
+    description:
+      "End-to-end application development with React.js frontend and Spring Boot backend.",
     icon: <Code2 size={32} />,
   },
 ];
 
-// Update projects data with more details
 const projects = [
   {
-    title: "E-Commerce Platform",
-    description: "A full-featured online shopping platform with real-time inventory management, payment processing, and user authentication.",
-    tech: ["React", "Node.js", "MongoDB", "Stripe", "AWS"],
-    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&fit=crop&q=80",
-    liveLink: "https://your-project-demo.com",
-    githubLink: "https://github.com/yourusername/project",
+    title: "Hospital Management System - Heal Hub",
+    description: "A comprehensive backend system for managing hospital operations including patients, doctors, appointments, and billing workflows.",
+    tech: ["Java", "Spring Boot", "PostgreSQL", "JWT", "Hibernate"],
+    image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&q=80",
+    liveLink: "https://github.com/sriram1224",
+    githubLink: "https://github.com/sriram1224",
     features: [
-      "Real-time inventory tracking",
-      "Secure payment processing",
-      "User authentication & authorization",
-      "Admin dashboard",
-      "Order management system"
+      "20+ RESTful endpoints with layered architecture",
+      "JWT authentication and role-based access control",
+      "Relational database schema with 8+ entities",
+      "JPA/Hibernate for data persistence",
+      "Patient, doctor, and appointment management"
     ]
   },
   {
-    title: "Task Management System",
-    description: "A collaborative project management tool with real-time updates, team collaboration, and progress tracking.",
-    tech: ["TypeScript", "React", "Firebase", "Material-UI", "Redux"],
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80",
-    liveLink: "https://your-task-manager-demo.com",
-    githubLink: "https://github.com/yourusername/task-manager",
+    title: "SnapTask AI - Smart Task & Reminder System",
+    description: "A backend task management system with AI-powered task summarization and intelligent scheduling features.",
+    tech: ["Java", "Spring Boot", "PostgreSQL", "JWT", "REST APIs"],
+    image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80",
+    liveLink: "https://github.com/sriram1224",
+    githubLink: "https://github.com/sriram1224",
     features: [
-      "Real-time task updates",
-      "Team collaboration",
-      "Progress tracking",
-      "File attachments",
-      "Task prioritization"
-    ]
-  },
-  {
-    title: "Analytics Dashboard",
-    description: "A comprehensive data visualization and analytics platform for business intelligence and reporting.",
-    tech: ["React", "D3.js", "Node.js", "PostgreSQL", "Express"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
-    liveLink: "https://your-analytics-demo.com",
-    githubLink: "https://github.com/yourusername/analytics-dashboard",
-    features: [
-      "Interactive data visualization",
-      "Custom reporting",
-      "Real-time metrics",
-      "Data export capabilities",
-      "User role management"
+      "15+ REST APIs with JWT authentication",
+      "Task categorization and recurring schedules",
+      "AI-based task summarization",
+      "Optimized database queries",
+      "Comprehensive backend validation"
     ]
   },
 ];
@@ -148,9 +120,9 @@ const TypingEffect = () => {
   const [typingSpeed, setTypingSpeed] = useState(150);
 
   const words = [
-    "{Full Stack Developer}",
+    "{Java Backend Developer}",
     "{Software Engineer}",
-    "{Tech Enthusiast}",
+    "{Full Stack Developer}",
   ];
 
   useEffect(() => {
@@ -603,8 +575,8 @@ function App() {
               </div>
 
               <p className="text-lg text-gray-300 max-w-xl">
-                Passionate about creating innovative web solutions and turning
-                complex problems into elegant interfaces.
+                Building scalable REST APIs and database-driven applications with Spring Boot.
+                Passionate about backend development, API security, and delivering maintainable solutions.
               </p>
 
               {/* Buttons and Social Links Container */}
@@ -676,47 +648,15 @@ function App() {
               <User className="text-[#29B475]" />
               <span>About Me</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-              <div>
-                <p className="text-gray-300 mb-6 text-sm md:text-base">
-                  With over 5 years of experience in full-stack development, I
-                  specialize in building scalable web applications that solve
-                  real-world problems. My approach combines technical expertise
-                  with creative problem-solving to deliver exceptional user
-                  experiences.
+            <div className="flex flex-col items-center">
+              <div className="max-w-4xl text-center">
+                <p className="text-gray-300 mb-8 text-base md:text-lg leading-relaxed">
+                  Java Backend Developer with strong experience building Spring Boot-based REST APIs and database-driven applications.
+                  Skilled in JPA/Hibernate, SQL optimization, and layered backend architecture. Hands-on with API security using JSON Web Tokens (JWT),
+                  backend problem solving, and containerized development using Docker. Comfortable working across the full backend development lifecycle
+                  and delivering scalable, maintainable services.
                 </p>
                 <SkillsMarquee />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#0C1E1B] p-4 md:p-6 rounded-lg">
-                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">
-                    5+
-                  </h3>
-                  <p className="text-gray-300 text-sm md:text-base">
-                    Years of Experience
-                  </p>
-                </div>
-                <div className="bg-[#0C1E1B] p-4 md:p-6 rounded-lg">
-                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">
-                    50+
-                  </h3>
-                  <p className="text-gray-300 text-sm md:text-base">
-                    Projects Completed
-                  </p>
-                </div>
-                <div className="bg-[#0C1E1B] p-4 md:p-6 rounded-lg">
-                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">
-                    30+
-                  </h3>
-                  <p className="text-gray-300 text-sm md:text-base">
-                    Happy Clients
-                  </p>
-                </div>
-                <div className="bg-[#0C1E1B] p-4 md:p-6 rounded-lg">
-                  <h3 className="text-2xl md:text-4xl font-bold text-[#29B475] mb-2">
-                    15+
-                  </h3>
-                </div>
               </div>
             </div>
           </div>
@@ -1122,11 +1062,11 @@ function App() {
                     </div>
                     <div>
                       <h4 className="text-gray-300 font-medium mb-1">Phone</h4>
-                      <a 
-                        href="tel:+1234567890"
+                      <a
+                        href="tel:+919398746611"
                         className="text-[#29B475] hover:underline"
                       >
-                        +1 (234) 567-890
+                        +91 93987 46611
                       </a>
                     </div>
                   </div>
