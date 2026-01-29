@@ -632,7 +632,7 @@ function App() {
             <div className="relative w-full max-w-lg mx-auto md:ml-auto order-first md:order-last">
               <div className="aspect-square relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://github.com/sriram1224/My-Portfolio/blob/main/src/assets/Professional%20portrait%20in%20crisp%20attire.png" // Updated image path
+                  src="https://collection.cloudinary.com/djqmqawu9/7e05c8514c483974347ff398c8d8f526" // Updated image path
                   alt="Professional Developer"
                   className="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105"
                 />
